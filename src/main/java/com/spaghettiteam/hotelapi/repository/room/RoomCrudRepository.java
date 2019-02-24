@@ -18,7 +18,7 @@ public interface RoomCrudRepository extends CrudRepository<Room, Long> {
             "where (:start >= re.startDate AND :start < re.endDate) OR (:end >= re.startDate AND :end < re.endDate)" +
             "OR (:start < re.startDate AND :end > re.endDate))) " +
             "and r.pricePerDay between :lowestPrice and :highestPrice")
-    List<Room> findAvailableRooms(@Param("lowestPrice") long lowestPrice, @Param("highestPrice") long highestPrice,
+    List<Room> findAvailableRooms(@Param("lowestPrice") double lowestPrice, @Param("highestPrice") double highestPrice,
                                   @Param("start") LocalDate startDate, @Param("end") LocalDate endDate);
 
     Optional<Room> findByRoomNumber(String roomNumber);

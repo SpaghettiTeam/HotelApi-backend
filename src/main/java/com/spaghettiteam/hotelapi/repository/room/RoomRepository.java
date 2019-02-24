@@ -17,7 +17,7 @@ public interface RoomRepository {
 
     List<Room> findRoomsWithinPrice(long startPrice, long endPrice);
 
-    List<Room> findAvailableRooms(long lowestPrice, long highestPrice, LocalDate startDate, LocalDate endDate);
+    List<Room> findAvailableRooms(double lowestPrice, double highestPrice, LocalDate startDate, LocalDate endDate);
 
     void updateById(long id, Room newRoom);
 

@@ -15,7 +15,7 @@ public class RoomRepositoryCrudImpl implements RoomRepository {
     private RoomCrudRepository roomCrudRepository;
 
     @Override
-    public List<Room> findAvailableRooms(long lowestPrice, long highestPrice, LocalDate startDate, LocalDate endDate) {
+    public List<Room> findAvailableRooms(double lowestPrice, double highestPrice, LocalDate startDate, LocalDate endDate) {
         return roomCrudRepository.findAvailableRooms(lowestPrice, highestPrice, startDate, endDate);
     }
 
