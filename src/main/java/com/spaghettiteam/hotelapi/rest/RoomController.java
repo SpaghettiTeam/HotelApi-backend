@@ -66,7 +66,6 @@ public class RoomController {
     public Room updateRoomId(@PathVariable("Id") long Id, @RequestBody Room room) {
         return roomService.updateRoomById(Id, room);
     }
-
     @PostMapping("api/room/add")
     public Room addRoom(@RequestBody RoomDTO roomDTO) {
         return roomService.addRoom(roomDTO);
