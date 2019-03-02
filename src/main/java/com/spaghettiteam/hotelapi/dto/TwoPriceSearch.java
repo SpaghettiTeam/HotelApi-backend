@@ -2,30 +2,30 @@ package com.spaghettiteam.hotelapi.dto;
 
 public class TwoPriceSearch {
 
-    private long lowestPrice;
-    private long highestPrice;
+    private double lowestPrice;
+    private double highestPrice;
 
     public TwoPriceSearch() {
     }
 
-    public TwoPriceSearch(long lowestPrice, long highestPrice) {
+    public TwoPriceSearch(double lowestPrice, double highestPrice) {
         this.lowestPrice = lowestPrice;
         this.highestPrice = highestPrice;
     }
 
-    public long getLowestPrice() {
+    public double getLowestPrice() {
         return lowestPrice;
     }
 
-    public void setLowestPrice(long lowestPrice) {
+    public void setLowestPrice(double lowestPrice) {
         this.lowestPrice = lowestPrice;
     }
 
-    public long getHighestPrice() {
+    public double getHighestPrice() {
         return highestPrice;
     }
 
-    public void setHighestPrice(long highestPrice) {
+    public void setHighestPrice(double highestPrice) {
         this.highestPrice = highestPrice;
     }
 }

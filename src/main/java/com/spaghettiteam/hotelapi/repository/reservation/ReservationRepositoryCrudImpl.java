@@ -51,7 +51,7 @@ public class ReservationRepositoryCrudImpl implements ReservationRepository {
 
     @Deprecated
     @Override
-    public List<Reservation> findAllAvaibleRoomsBetweendDatesAndWithinPrice(LocalDate startDate, LocalDate endDate, long lowestPriceMuliplied, long highestPriceMultiplied) {
+    public List<Reservation> findAllAvaibleRoomsBetweendDatesAndWithinPrice(LocalDate startDate, LocalDate endDate, double lowestPriceMuliplied, double highestPriceMultiplied) {
         return null;
     }
 }

@@ -8,11 +8,12 @@ import com.spaghettiteam.hotelapi.model.Reservation;
 import com.spaghettiteam.hotelapi.model.Room;
 import com.spaghettiteam.hotelapi.repository.reservation.ReservationRepository;
 import com.spaghettiteam.hotelapi.repository.room.RoomRepository;
+import com.spaghettiteam.hotelapi.validation.SearchDTOValidator;
 import com.spaghettiteam.hotelapi.validation.TwoDatesSearchValidator;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -24,12 +25,20 @@ public class SearchService {
     private RoomRepository roomRepository;
 
     @Autowired
+    private SearchDTOValidator searchDTOValidator;
+    @Autowired
     private TwoDatesSearchValidator twoDatesSearchValidator;
     @Autowired
     private ReservationRepository reservationRepository;
 
+
     public List<Room> findRooms(SearchDTO search) {
-        return roomRepository.findAvailableRooms(search.getLowestPrice(), search.getHighestPrice(), search.getStartDate(), search.getEndDate());
+        searchDTOValidator.validate(search);
+        double lowestPrice = search.getLowestPrice();
+        double highestPrice = search.getHighestPrice();
+        LocalDate startDate = search.getStartDate();
+        LocalDate endDate = search.getEndDate();
+        return roomRepository.findAvailableRooms(lowestPrice, highestPrice, startDate, endDate);
     }
 
     @Deprecated
@@ -42,12 +51,13 @@ public class SearchService {
     public List<Reservation> findAvailableRoomsBetweenDatesAndPrices(TwoDatesAndTwoPriceSearch twoDatesAndTwoPriceSearch) {
 //        twoDatesAndTwoPriceSearchValidator.validate(twoDatesAndTwoPriceSearch);
         long days = countDaysFromTwoDatesSearch(twoDatesAndTwoPriceSearch.getTwoDates());
-        long lowestPriceMuliplied = twoDatesAndTwoPriceSearch.getTwoPrices().getLowestPrice() * days;
-        long highestPriceMultiplied = twoDatesAndTwoPriceSearch.getTwoPrices().getHighestPrice() * days;
+        double lowestPriceMuliplied = twoDatesAndTwoPriceSearch.getTwoPrices().getLowestPrice() * days;
+        double highestPriceMultiplied = twoDatesAndTwoPriceSearch.getTwoPrices().getHighestPrice() * days;
         return reservationRepository.findAllAvaibleRoomsBetweendDatesAndWithinPrice(
                 twoDatesAndTwoPriceSearch.getTwoDates().getStartDate(), twoDatesAndTwoPriceSearch.getTwoDates().getEndDate(),
                 lowestPriceMuliplied, highestPriceMultiplied);
     }
+
     @Deprecated
     public List<Room> findRoomsWithinPrice(long startPrice, long endPrice) {
         List<Room> rooms = roomRepository.findRoomsWithinPrice(startPrice, endPrice);
