@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 @Entity
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
