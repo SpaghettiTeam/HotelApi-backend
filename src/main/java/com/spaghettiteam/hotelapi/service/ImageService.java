@@ -18,7 +18,7 @@ public class ImageService {
     private RoomRepository roomRepository;
 
     public Image savePhoto(Image newImage) {
-        roomRepository.findById(newImage.getRoomId()).orElseThrow(RoomNotFoundException::new);
+        roomRepository.findById(newImage.getRoom().getId()).orElseThrow(RoomNotFoundException::new);
         imageRepository.save(newImage);
         return newImage;
     }

@@ -12,16 +12,14 @@ public class Image {
     private String type;
     @Lob
     private Blob photo;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(referencedColumnName = "id")
-    private long RoomId;
+    @ManyToOne
+    private Room room;
 
-    public Image(long id, String name, String type, Blob photo, long roomId) {
-        this.id = id;
+    public Image(String name, String type, Blob photo, Room room) {
         this.name = name;
         this.type = type;
         this.photo = photo;
-        RoomId = roomId;
+        this.room = room;
     }
 
     public long getId() {
@@ -56,11 +54,11 @@ public class Image {
         this.photo = photo;
     }
 
-    public long getRoomId() {
-        return RoomId;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setRoomId(long roomId) {
-        RoomId = roomId;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }
