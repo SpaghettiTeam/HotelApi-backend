@@ -12,9 +12,9 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
-    @PostMapping("/api/image/{RoomId}/")
-    public Image addImageForRoomId(@PathVariable("RoomId") String roomNumber, @RequestBody Image image)
+    @PostMapping("/api/image/")
+    public Image addImageForRoomId( @RequestBody Image image)
     {
-        return imageService.savePhoto(image)
+        return imageService.savePhoto(image);
     }
 }
