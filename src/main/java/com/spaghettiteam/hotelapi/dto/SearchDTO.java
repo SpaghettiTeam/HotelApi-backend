@@ -5,13 +5,13 @@ import java.time.LocalDate;
 public class SearchDTO {
     private LocalDate startDate;
     private LocalDate endDate;
-    private long lowestPrice;
-    private long highestPrice;
+    private double lowestPrice;
+    private double highestPrice;
 
     public SearchDTO() {
     }
 
-    public SearchDTO(LocalDate startDate, LocalDate endDate, long lowestPrice, long highestPrice) {
+    public SearchDTO(LocalDate startDate, LocalDate endDate, double lowestPrice, double highestPrice) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.lowestPrice = lowestPrice;
@@ -34,27 +34,27 @@ public class SearchDTO {
         this.endDate = endDate;
     }
 
-    public long getLowestPrice() {
+    public double getLowestPrice() {
         return lowestPrice;
     }
 
-    public void setLowestPrice(long lowestPrice) {
+    public void setLowestPrice(double lowestPrice) {
         this.lowestPrice = lowestPrice;
     }
 
-    public long getHighestPrice() {
+    public double getHighestPrice() {
         return highestPrice;
     }
 
-    public void setHighestPrice(long highestPrice) {
+    public void setHighestPrice(double highestPrice) {
         this.highestPrice = highestPrice;
     }
 
     public static final class SearchDTOBuilder {
         private LocalDate startDate;
         private LocalDate endDate;
-        private long lowestPrice;
-        private long highestPrice;
+        private double lowestPrice;
+        private double highestPrice;
 
         private SearchDTOBuilder() {
         }
@@ -73,12 +73,12 @@ public class SearchDTO {
             return this;
         }
 
-        public SearchDTOBuilder withLowestPrice(long lowestPrice) {
+        public SearchDTOBuilder withLowestPrice(double lowestPrice) {
             this.lowestPrice = lowestPrice;
             return this;
         }
 
-        public SearchDTOBuilder withHighestPrice(long highestPrice) {
+        public SearchDTOBuilder withHighestPrice(double highestPrice) {
             this.highestPrice = highestPrice;
             return this;
         }

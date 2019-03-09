@@ -12,7 +12,7 @@ public interface ReservationRepository {
 
     Reservation save(Reservation reservation);
 
-    List<Reservation> findAllAvaibleRoomsBetweendDatesAndWithinPrice(LocalDate startDate, LocalDate endDate, long lowestPriceMuliplied, long highestPriceMultiplied);
+    List<Reservation> findAllAvaibleRoomsBetweendDatesAndWithinPrice(LocalDate startDate, LocalDate endDate, double lowestPriceMuliplied, double highestPriceMultiplied);
 
     Optional<Reservation> findById(long id);
 
