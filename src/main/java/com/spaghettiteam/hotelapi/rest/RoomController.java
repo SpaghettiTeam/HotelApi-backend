@@ -1,6 +1,6 @@
 package com.spaghettiteam.hotelapi.rest;
 
-import com.spaghettiteam.hotelapi.dto.RoomDTO;
+import com.spaghettiteam.hotelapi.dto.RoomToSendDTO;
 import com.spaghettiteam.hotelapi.model.Room;
 import com.spaghettiteam.hotelapi.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,8 @@ public class RoomController {
     private RoomService roomService;
 
     @GetMapping("/api/roomdto/test1")
-    public RoomDTO testRoomDTO() {
-        return RoomDTO.RoomDTOBuilder.aRoomDTO()
+    public RoomToSendDTO testRoomDTO() {
+        return RoomToSendDTO.RoomDTOBuilder.aRoomDTO()
                 .withRoomId(1)
                 .withRating(3)
                 .withPricePerDay(70)
@@ -66,8 +66,9 @@ public class RoomController {
     public Room updateRoomId(@PathVariable("Id") long Id, @RequestBody Room room) {
         return roomService.updateRoomById(Id, room);
     }
+
     @PostMapping("api/room/add")
-    public Room addRoom(@RequestBody RoomDTO roomDTO) {
+    public Room addRoom(@RequestBody RoomToSendDTO roomDTO) {
         return roomService.addRoom(roomDTO);
     }
 }
