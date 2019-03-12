@@ -1,16 +1,16 @@
 package com.spaghettiteam.hotelapi.dto;
 
-public class RoomDTO {
+public class RoomToSendDTO {
 
     private long roomId;
     private double pricePerDay;
     private String photoLink;
     private float rating;
 
-    public RoomDTO() {
+    public RoomToSendDTO() {
     }
 
-    public RoomDTO(long roomId, double pricePerDay, String photoLink, float rating) {
+    public RoomToSendDTO(long roomId, double pricePerDay, String photoLink, float rating) {
         this.roomId = roomId;
         this.pricePerDay = pricePerDay;
         this.photoLink = photoLink;
@@ -83,8 +83,8 @@ public class RoomDTO {
             return this;
         }
 
-        public RoomDTO build() {
-            RoomDTO roomDTO = new RoomDTO();
+        public RoomToSendDTO build() {
+            RoomToSendDTO roomDTO = new RoomToSendDTO();
             roomDTO.setRoomId(roomId);
             roomDTO.setPricePerDay(pricePerDay);
             roomDTO.setPhotoLink(photoLink);

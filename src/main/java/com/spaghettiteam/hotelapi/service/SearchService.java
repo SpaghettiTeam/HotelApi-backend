@@ -30,8 +30,7 @@ public class SearchService {
     private TwoDatesSearchValidator twoDatesSearchValidator;
     @Autowired
     private ReservationRepository reservationRepository;
-
-
+    
     public List<Room> findRooms(SearchDTO search) {
         searchDTOValidator.validate(search);
         double lowestPrice = search.getLowestPrice();

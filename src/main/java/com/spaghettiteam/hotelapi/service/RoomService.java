@@ -1,7 +1,6 @@
 package com.spaghettiteam.hotelapi.service;
 
-import com.spaghettiteam.hotelapi.dto.RoomDTO;
-import com.spaghettiteam.hotelapi.exception.RoomAlreadyExistException;
+import com.spaghettiteam.hotelapi.dto.RoomToSendDTO;
 import com.spaghettiteam.hotelapi.exception.RoomNotFoundException;
 import com.spaghettiteam.hotelapi.model.Room;
 import com.spaghettiteam.hotelapi.repository.room.RoomRepository;
@@ -29,7 +28,7 @@ public class RoomService {
         return roomRepository.findByRoomNumber(roomNumber);
     }
 
-    public Room addRoom(RoomDTO room) {
+    public Room addRoom(RoomToSendDTO room) {
         //Todo make it work
 //        if(!findByRoomNumberWOException(room.getRoomNumber()).isPresent())
 //            return roomRepository.save(Room.RoomBuilder.aRoom()
