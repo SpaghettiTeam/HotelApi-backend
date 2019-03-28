@@ -1,6 +1,8 @@
 package com.spaghettiteam.hotelapi.rest;
 
 import com.spaghettiteam.hotelapi.config.JWT.UserAuthenticationService;
+import com.spaghettiteam.hotelapi.dto.UserToLogin;
+import com.spaghettiteam.hotelapi.dto.UserToRegister;
 import com.spaghettiteam.hotelapi.model.User;
 import com.spaghettiteam.hotelapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    UserAuthenticationService authenticationService;
+    private UserAuthenticationService authenticationService;
     @Autowired
     private UserService userService;
 
@@ -22,28 +24,20 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    String login(
-            @RequestParam("username") final String username,
-            @RequestParam("password") final String password) {
-        System.out.println("logowanie");
+    public String login(@RequestBody UserToLogin user) {
         return authenticationService
-                .login(username, password)
+                .login(user.getUsername(), user.getPassword())
                 .orElseThrow(() -> new RuntimeException("invalid login and/or password"));
     }
 
-    @GetMapping("/register")
-    String register(
-            @RequestParam(required = false, name = "username") final String username,
-            @RequestParam("password") final String password) {
-        userService.saveUser(new User(username, password, "ad"));
-        System.out.println("Zarejestrowano uzytkownika");
-        return login(username, password);
+    @PostMapping("/register")
+    public String register(@RequestBody UserToRegister user) {
+        userService.saveUser(new User(user.getUsername(), user.getPassword(), user.getEmail()));
+        return login(new UserToLogin(user.getUsername(), user.getPassword()));
     }
 
     @GetMapping("/users/current")
-    User getCurrent(@AuthenticationPrincipal final User user) {
+    public User getCurrent(@AuthenticationPrincipal final User user) {
         return user;
     }
-
-
 }
