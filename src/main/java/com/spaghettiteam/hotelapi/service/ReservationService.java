@@ -7,7 +7,7 @@ import com.spaghettiteam.hotelapi.exception.RoomNotFoundException;
 import com.spaghettiteam.hotelapi.model.Reservation;
 import com.spaghettiteam.hotelapi.model.User;
 import com.spaghettiteam.hotelapi.repository.reservation.ReservationRepository;
-import com.spaghettiteam.hotelapi.validation.Validator;
+import com.spaghettiteam.hotelapi.validation.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

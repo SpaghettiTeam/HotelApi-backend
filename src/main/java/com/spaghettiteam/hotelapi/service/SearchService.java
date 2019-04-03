@@ -8,8 +8,8 @@ import com.spaghettiteam.hotelapi.model.Reservation;
 import com.spaghettiteam.hotelapi.model.Room;
 import com.spaghettiteam.hotelapi.repository.reservation.ReservationRepository;
 import com.spaghettiteam.hotelapi.repository.room.RoomRepository;
-import com.spaghettiteam.hotelapi.validation.SearchDTOValidator;
-import com.spaghettiteam.hotelapi.validation.TwoDatesSearchValidator;
+import com.spaghettiteam.hotelapi.validation.validator.SearchDTOValidator;
+import com.spaghettiteam.hotelapi.validation.validator.TwoDatesSearchValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

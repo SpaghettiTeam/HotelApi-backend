@@ -26,4 +26,9 @@ public class UserRepositoryCrudImpl implements UserRepository {
     public Optional<User> findByUsername(String username) {
         return userCrudRepository.findByUsername(username);
     }
+
+    @Override
+    public User findByEmail(String email) {
+        return userCrudRepository.findByEmail(email);
+    }
 }

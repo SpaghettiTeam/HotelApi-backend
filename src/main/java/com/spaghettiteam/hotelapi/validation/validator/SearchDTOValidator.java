@@ -1,4 +1,4 @@
-package com.spaghettiteam.hotelapi.validation;
+package com.spaghettiteam.hotelapi.validation.validator;
 
 import com.spaghettiteam.hotelapi.dto.SearchDTO;
 import com.spaghettiteam.hotelapi.dto.TwoDatesSearch;

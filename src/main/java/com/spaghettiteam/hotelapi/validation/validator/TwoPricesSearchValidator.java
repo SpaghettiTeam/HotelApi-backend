@@ -1,6 +1,8 @@
-package com.spaghettiteam.hotelapi.validation;
+package com.spaghettiteam.hotelapi.validation.validator;
 
 import com.spaghettiteam.hotelapi.dto.TwoPriceSearch;
+import com.spaghettiteam.hotelapi.validation.rule.Rule;
+import com.spaghettiteam.hotelapi.validation.rule.LowestPriceIsLower;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;

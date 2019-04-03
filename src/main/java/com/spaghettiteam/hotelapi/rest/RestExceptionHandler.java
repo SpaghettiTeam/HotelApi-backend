@@ -1,13 +1,12 @@
 package com.spaghettiteam.hotelapi.rest;
 
 import com.spaghettiteam.hotelapi.exception.RoomNotFoundException;
+import com.spaghettiteam.hotelapi.exception.UserAlreadyExistException;
 import com.spaghettiteam.hotelapi.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import javax.xml.ws.Response;
 
 @ControllerAdvice
 public class RestExceptionHandler {
@@ -27,4 +26,8 @@ public class RestExceptionHandler {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Object> userAlreadyExistException(UserAlreadyExistException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

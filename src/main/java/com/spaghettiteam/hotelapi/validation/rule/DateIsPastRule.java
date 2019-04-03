@@ -1,4 +1,4 @@
-package com.spaghettiteam.hotelapi.validation;
+package com.spaghettiteam.hotelapi.validation.rule;
 
 import java.time.LocalDate;
 

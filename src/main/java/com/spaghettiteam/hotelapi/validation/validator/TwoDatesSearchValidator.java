@@ -1,6 +1,9 @@
-package com.spaghettiteam.hotelapi.validation;
+package com.spaghettiteam.hotelapi.validation.validator;
 
 import com.spaghettiteam.hotelapi.dto.TwoDatesSearch;
+import com.spaghettiteam.hotelapi.validation.rule.Rule;
+import com.spaghettiteam.hotelapi.validation.rule.StartDateBeforeEndDateRule;
+import com.spaghettiteam.hotelapi.validation.rule.DateIsPastRule;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

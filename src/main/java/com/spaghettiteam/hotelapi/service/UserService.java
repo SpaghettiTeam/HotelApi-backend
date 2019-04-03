@@ -1,5 +1,6 @@
 package com.spaghettiteam.hotelapi.service;
 
+import com.spaghettiteam.hotelapi.exception.UserAlreadyExistException;
 import com.spaghettiteam.hotelapi.exception.UserNotFoundException;
 import com.spaghettiteam.hotelapi.model.User;
 import com.spaghettiteam.hotelapi.repository.user.UserRepository;
@@ -27,6 +28,13 @@ public class UserService {
     }
 
     public User saveUser(User user) {
-        return userRepository.save(user);
+        if (findByUsername(user.getUsername()) != null
+            || findByEmail(user.getEmail()) != null)
+            return userRepository.save(user);
+        throw new UserAlreadyExistException();
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }
