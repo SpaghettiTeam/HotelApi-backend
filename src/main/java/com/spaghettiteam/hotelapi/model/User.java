@@ -15,9 +15,13 @@ public class User implements UserDetails {
     @GeneratedValue()
     private long id;
 
-//    @ManyToOne(cascade = {CascadeType.ALL})
-//    @JoinColumn(referencedColumnName = "id")
-//    private Role role;
+    @OneToOne
+    @JoinColumn(referencedColumnName = "id")
+    private UserData userData;
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(referencedColumnName = "id")
+    private Role role;
 
     private String username;
     private String password;
@@ -32,13 +36,29 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-//    public Role getRole() {
-//        return role;
-//    }
-//
-//    public void setRole(Role role) {
-//        this.role = role;
-//    }
+    public User(UserData userData, Role role, String username, String password, String email) {
+        this.userData = userData;
+        this.role = role;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public UserData getUserData() {
+        return userData;
+    }
+
+    public void setUserData(UserData userData) {
+        this.userData = userData;
+    }
 
     public long getId() {
         return id;
