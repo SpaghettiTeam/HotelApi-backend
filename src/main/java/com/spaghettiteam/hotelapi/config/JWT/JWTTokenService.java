@@ -27,7 +27,7 @@ final class JWTTokenService implements Clock, TokenService {
     private String secretKey;
 
     JWTTokenService(
-            @Value("${jwt.issuer:octoperf}") final String issuer,
+            @Value("${jwt.issuer:vengard}") final String issuer,
             @Value("${jwt.expiration-sec:86400}") final int expirationSec,
             @Value("${jwt.clock-skew-sec:300}") final int clockSkewSec,
             @Value("${jwt.secret:secret}") final String secret) {

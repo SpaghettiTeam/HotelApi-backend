@@ -20,8 +20,6 @@ public class ReservationService {
     private ReservationRepository reservationRepository;
 
     @Autowired
-    private UserService userService;
-    @Autowired
     private RoomService roomService;
 
     @Autowired
