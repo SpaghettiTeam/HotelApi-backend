@@ -15,6 +15,31 @@ public class RoomController {
     @Autowired
     private RoomService roomService;
 
+    @GetMapping("/api/room/id/{Id}")
+    public Room findById(@PathVariable("Id") long Id) {
+        return roomService.findById(Id);
+    }
+
+    @GetMapping("/api/room/all")
+    public List<Room> findAllRooms() {
+        return roomService.findAll();
+    }
+
+    @DeleteMapping("/api/room/{Id}")
+    public Room deleteRoomId(@PathVariable("Id") long Id) {
+        return roomService.deleteRoomById(Id);
+    }
+
+    @PostMapping("/api/room/{Id}")
+    public Room updateRoomId(@PathVariable("Id") long Id, @RequestBody Room room) {
+        return roomService.updateRoomById(Id, room);
+    }
+
+    @PostMapping("api/room/add")
+    public Room addRoom(@RequestBody Room room) {
+        return roomService.addRoom(room);
+    }
+
     @GetMapping("/api/roomdto/test1")
     public RoomToSendDTO testRoomDTO() {
         return RoomToSendDTO.RoomDTOBuilder.aRoomDTO()
@@ -47,28 +72,4 @@ public class RoomController {
         return roomService.findByRoomNumber(roomNumber);
     }
 
-    @GetMapping("/api/room/id/{Id}")
-    public Room findById(@PathVariable("Id") long Id) {
-        return roomService.findById(Id);
-    }
-
-    @GetMapping("/api/room/all")
-    public List<Room> findAllRooms() {
-        return roomService.findAll();
-    }
-
-    @DeleteMapping("/api/room/{Id}")
-    public Room deleteRoomId(@PathVariable("Id") long Id) {
-        return roomService.deleteRoomById(Id);
-    }
-
-    @PostMapping("/api/room/{Id}")
-    public Room updateRoomId(@PathVariable("Id") long Id, @RequestBody Room room) {
-        return roomService.updateRoomById(Id, room);
-    }
-
-    @PostMapping("api/room/add")
-    public Room addRoom(@RequestBody RoomToSendDTO roomDTO) {
-        return roomService.addRoom(roomDTO);
-    }
 }

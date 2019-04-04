@@ -1,6 +1,6 @@
 package com.spaghettiteam.hotelapi.service;
 
-import com.spaghettiteam.hotelapi.dto.RoomToSendDTO;
+import com.spaghettiteam.hotelapi.exception.RoomAlreadyExistException;
 import com.spaghettiteam.hotelapi.exception.RoomNotFoundException;
 import com.spaghettiteam.hotelapi.model.Room;
 import com.spaghettiteam.hotelapi.repository.room.RoomRepository;
@@ -20,24 +20,27 @@ public class RoomService {
         return roomRepository.findById(id).orElseThrow(RoomNotFoundException::new);
     }
 
-   public Room findByRoomNumber(String roomNumber) {
+    public Room findByRoomNumber(String roomNumber) {
         return roomRepository.findByRoomNumber(roomNumber).orElseThrow(RoomNotFoundException::new);
     }
 
-   public Optional<Room> findByRoomNumberWOException(String roomNumber) {
+    public Room addRoom(Room room) {
+        if (!findByRoomNumberWOException(room.getRoomNumber()).isPresent())
+            return roomRepository.save(Room.RoomBuilder.aRoom()
+                    .withRoomNumber(room.getRoomNumber())
+                    .withPricePerDay(room.getPricePerDay())
+                    .withRating(room.getRating())
+                    .withPhotoLink(room.getPhotoLink())
+                    .withPetFriendly(room.isPetFriendly())
+                    .withDescription(room.getDescription())
+                    .build());
+        throw new RoomAlreadyExistException();
+    }
+
+    private Optional<Room> findByRoomNumberWOException(String roomNumber) {
         return roomRepository.findByRoomNumber(roomNumber);
     }
 
-    public Room addRoom(RoomToSendDTO room) {
-        //Todo make it work
-//        if(!findByRoomNumberWOException(room.getRoomNumber()).isPresent())
-//            return roomRepository.save(Room.RoomBuilder.aRoom()
-//                    .withRoomNumber(room.getRoomNumber())
-//                    .withPricePerDay(room.getPricePerDay())
-//                    .build());
-//        throw new RoomAlreadyExistException();
-        return new Room();
-    }
 
     public Room deleteRoomById(long id) {
         Room room = roomRepository.findById(id).orElseThrow(RoomNotFoundException::new);
