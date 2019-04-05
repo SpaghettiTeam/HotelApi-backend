@@ -28,6 +28,6 @@ final class TokenAuthenticationProvider extends AbstractUserDetailsAuthenticatio
                 .ofNullable(token)
                 .map(String::valueOf)
                 .flatMap(userAuthenticationService::findByToken)
-                .orElseThrow(UserNotFoundException::new);
+                .orElseThrow(() -> new UserNotFoundException("Cannot find username with this authentication token"));
     }
 }

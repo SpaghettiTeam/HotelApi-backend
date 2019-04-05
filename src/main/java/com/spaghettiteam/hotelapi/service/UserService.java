@@ -28,13 +28,13 @@ public class UserService {
     }
 
     public User saveUser(User user) {
-        if (findByUsername(user.getUsername()) != null
-            || findByEmail(user.getEmail()) != null)
+        if (!findOptionalByUsername(user.getUsername()).isPresent()
+            || !findByEmail(user.getEmail()).isPresent())
             return userRepository.save(user);
         throw new UserAlreadyExistException();
     }
 
-    public User findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 }
