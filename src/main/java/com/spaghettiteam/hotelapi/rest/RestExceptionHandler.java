@@ -1,5 +1,6 @@
 package com.spaghettiteam.hotelapi.rest;
 
+import com.spaghettiteam.hotelapi.exception.InvalidUserCredentials;
 import com.spaghettiteam.hotelapi.exception.RoomNotFoundException;
 import com.spaghettiteam.hotelapi.exception.UserAlreadyExistException;
 import com.spaghettiteam.hotelapi.exception.UserNotFoundException;
@@ -26,8 +27,13 @@ public class RestExceptionHandler {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
+    @ExceptionHandler(UserAlreadyExistException.class)
     public ResponseEntity<Object> userAlreadyExistException(UserAlreadyExistException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidUserCredentials.class)
+    public ResponseEntity<Object> invalidUserCredentailsException(InvalidUserCredentials e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

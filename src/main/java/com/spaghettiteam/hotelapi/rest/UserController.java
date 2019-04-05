@@ -3,6 +3,7 @@ package com.spaghettiteam.hotelapi.rest;
 import com.spaghettiteam.hotelapi.config.JWT.UserAuthenticationService;
 import com.spaghettiteam.hotelapi.dto.UserToLogin;
 import com.spaghettiteam.hotelapi.dto.UserToRegister;
+import com.spaghettiteam.hotelapi.exception.InvalidUserCredentials;
 import com.spaghettiteam.hotelapi.model.User;
 import com.spaghettiteam.hotelapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class UserController {
     public String login(@RequestBody UserToLogin user) {
         return authenticationService
                 .login(user.getUsername(), user.getPassword())
-                .orElseThrow(() -> new RuntimeException("invalid login and/or password"));
+                .orElseThrow(InvalidUserCredentials::new);
     }
 
     @PostMapping("/register")

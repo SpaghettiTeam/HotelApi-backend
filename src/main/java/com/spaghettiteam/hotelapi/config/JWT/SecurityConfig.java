@@ -28,10 +28,12 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final RequestMatcher PUBLIC_URLS = new OrRequestMatcher(
-            new AntPathRequestMatcher("/login")
+            new AntPathRequestMatcher("/api/")
     );
     private static final RequestMatcher PROTECTED_URLS =
-            new AndRequestMatcher(new AntPathRequestMatcher("/**"));
+            new AndRequestMatcher(new AntPathRequestMatcher("/api/logged"));
+
+    private static final RequestMatcher ADMIN_URLS = new OrRequestMatcher(new AntPathRequestMatcher("api/admin"));
 
     @Autowired
     @Qualifier("ownProvider")
@@ -52,6 +54,44 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().requestMatchers(PUBLIC_URLS);
     }
 
+//    @Override
+//    protected void configure(final HttpSecurity http) throws Exception {
+//        http
+//                .sessionManagement()
+//                .sessionCreationPolicy(STATELESS)
+//                .and()
+//                .exceptionHandling()
+//                // this entry point handles when you request a protected page and you are not yet
+//                // authenticated
+//                .defaultAuthenticationEntryPointFor(forbiddenEntryPoint(), PROTECTED_URLS)
+//                .and()
+//                .authenticationProvider(provider)
+//                .addFilterBefore(restAuthenticationFilter(), AnonymousAuthenticationFilter.class)
+//                .authorizeRequests()
+//                .requestMatchers(PROTECTED_URLS)
+//                .authenticated()
+//                .and()
+//                .authorizeRequests()
+//                .requestMatchers(PUBLIC_URLS)
+//                .permitAll()
+//                .and()
+//                .authorizeRequests()
+//                .requestMatchers(ADMIN_URLS)
+//                .hasAuthority("admin")
+////                .antMatchers(HttpMethod.POST, "/register", "/login")
+////                .permitAll()
+////                .and()
+////                .authorizeRequests()
+////                .antMatchers("/**")
+////                .hasAuthority("admin")
+//                .and()
+//                .csrf().disable()
+//                .formLogin().disable()
+//                .httpBasic().disable()
+//                .logout().disable()
+//                .authorizeRequests();
+//    }
+
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http
@@ -69,12 +109,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .requestMatchers(PROTECTED_URLS)
                 .authenticated()
                 .and()
+                .authenticationProvider(provider)
+                .addFilterBefore(restAuthenticationFilter(), AnonymousAuthenticationFilter.class)
+                .authorizeRequests()
+                .requestMatchers(ADMIN_URLS)
+                .hasAuthority("admin")
+                .and()
                 .csrf().disable()
                 .formLogin().disable()
                 .httpBasic().disable()
-                .logout().disable()
-                .antMatcher("/api/logged").authorizeRequests();
+                .logout().disable();
     }
+
 
 //    @Override
 //    protected void configure(HttpSecurity http) throws Exception {
