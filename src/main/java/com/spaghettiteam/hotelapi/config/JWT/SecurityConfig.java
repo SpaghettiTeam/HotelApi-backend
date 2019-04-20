@@ -54,44 +54,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().requestMatchers(PUBLIC_URLS);
     }
 
-//    @Override
-//    protected void configure(final HttpSecurity http) throws Exception {
-//        http
-//                .sessionManagement()
-//                .sessionCreationPolicy(STATELESS)
-//                .and()
-//                .exceptionHandling()
-//                // this entry point handles when you request a protected page and you are not yet
-//                // authenticated
-//                .defaultAuthenticationEntryPointFor(forbiddenEntryPoint(), PROTECTED_URLS)
-//                .and()
-//                .authenticationProvider(provider)
-//                .addFilterBefore(restAuthenticationFilter(), AnonymousAuthenticationFilter.class)
-//                .authorizeRequests()
-//                .requestMatchers(PROTECTED_URLS)
-//                .authenticated()
-//                .and()
-//                .authorizeRequests()
-//                .requestMatchers(PUBLIC_URLS)
-//                .permitAll()
-//                .and()
-//                .authorizeRequests()
-//                .requestMatchers(ADMIN_URLS)
-//                .hasAuthority("admin")
-////                .antMatchers(HttpMethod.POST, "/register", "/login")
-////                .permitAll()
-////                .and()
-////                .authorizeRequests()
-////                .antMatchers("/**")
-////                .hasAuthority("admin")
-//                .and()
-//                .csrf().disable()
-//                .formLogin().disable()
-//                .httpBasic().disable()
-//                .logout().disable()
-//                .authorizeRequests();
-//    }
-
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http
@@ -106,14 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationProvider(provider)
                 .addFilterBefore(restAuthenticationFilter(), AnonymousAuthenticationFilter.class)
                 .authorizeRequests()
-                .requestMatchers(PROTECTED_URLS)
-                .authenticated()
-                .and()
-                .authenticationProvider(provider)
-                .addFilterBefore(restAuthenticationFilter(), AnonymousAuthenticationFilter.class)
-                .authorizeRequests()
-                .requestMatchers(ADMIN_URLS)
-                .hasAuthority("admin")
+                .requestMatchers(PROTECTED_URLS).authenticated()
+                .requestMatchers(ADMIN_URLS).hasRole("ADMIN")
                 .and()
                 .csrf().disable()
                 .formLogin().disable()

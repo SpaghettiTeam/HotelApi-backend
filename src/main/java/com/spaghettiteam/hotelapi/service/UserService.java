@@ -5,12 +5,15 @@ import com.spaghettiteam.hotelapi.exception.UserNotFoundException;
 import com.spaghettiteam.hotelapi.model.User;
 import com.spaghettiteam.hotelapi.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
@@ -34,7 +37,13 @@ public class UserService {
         throw new UserAlreadyExistException();
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return findByUsername(s);
+    }
+
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
 }

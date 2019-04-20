@@ -9,8 +9,12 @@ import java.util.Optional;
 @Repository
 public class UserRepositoryCrudImpl implements UserRepository {
 
-    @Autowired
     private UserCrudRepository userCrudRepository;
+
+    @Autowired
+    public UserRepositoryCrudImpl(UserCrudRepository userCrudRepository) {
+        this.userCrudRepository = userCrudRepository;
+    }
 
     @Override
     public User save(User user) {

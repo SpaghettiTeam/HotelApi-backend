@@ -1,5 +1,6 @@
 package com.spaghettiteam.hotelapi.rest;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ public class WelcomeController {
         return "Hello world for logged!";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @CrossOrigin(origins = "https://hotelapi-backend.herokuapp.com")
     @GetMapping("/api/admin")
     public String welcomeForAdmin() {
